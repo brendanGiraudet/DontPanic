@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace DontPanic
 {
@@ -23,8 +22,9 @@ namespace DontPanic
                 int clonePos = int.Parse(inputs[1]); // position of the leading clone on its floor
                 string direction = inputs[2]; // direction of the leading clone: LEFT or RIGHT
 
-                var currentElevator = elevators[cloneFloor];
-                if (NeedBlock(currentElevator, clonePos, direction))
+                var currentElevator = elevators.Find(e => e.Floor.Equals(cloneFloor));
+
+                if (currentElevator != null && NeedBlock(currentElevator, clonePos, direction))
                 {
                     Console.WriteLine("BLOCK");
                     continue;
@@ -45,13 +45,8 @@ namespace DontPanic
         private static List<Elevator> GetElevetors()
         {
             var inputs = Console.ReadLine().Split(' ');
-            int nbFloors = int.Parse(inputs[0]); // number of floors
-            int width = int.Parse(inputs[1]); // width of the area
-            int nbRounds = int.Parse(inputs[2]); // maximum number of rounds
             int exitFloor = int.Parse(inputs[3]); // floor on which the exit is found
             int exitPos = int.Parse(inputs[4]); // position of the exit on its floor
-            int nbTotalClones = int.Parse(inputs[5]); // number of generated clones
-            int nbAdditionalElevators = int.Parse(inputs[6]); // ignore (always zero)
 
             List<Elevator> elevators = new List<Elevator>();
             int nbElevators = int.Parse(inputs[7]); // number of elevators
@@ -80,11 +75,10 @@ namespace DontPanic
     {
         public int Floor { get; set; }
         public int Pos { get; set; }
-        public bool NeedBlock { get; set; }
 
         public override string ToString()
         {
-            return $"Floor : {Floor} Pos : {Pos} NeedBlock : {NeedBlock}";
+            return $"Floor : {Floor} Pos : {Pos}";
         }
     }
 }
