@@ -1,0 +1,9 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/Player/.vs/Player/v16
+/Player/Player/obj
+/Player/Player/bin
+/Player/Player.Tests/obj
+/Player/Player.Tests/bin
